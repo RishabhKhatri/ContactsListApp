@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ContactsList</string>
+    <string name="editName">Name</string>
+    <string name="editEmail">E-mail</string>
+    <string name="editPhone">Phone Number</string>
+    <string name="listTitle">All Contacts</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_refresh">Refresh</string>
+</resources>
