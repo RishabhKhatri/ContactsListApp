@@ -85,14 +85,15 @@ public class ContactDetails extends Fragment {
             }
         });
 
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading profile image...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-
         if (contact!=null) {
             if (contact.getImage()!=null) {
+
+                final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("Loading profile image...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+
                 Picasso.with(context).load(contact.getImage()).into(profileImage, new Callback() {
                     @Override
                     public void onSuccess() {

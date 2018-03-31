@@ -43,9 +43,11 @@ public class ContactActivity extends AppCompatActivity {
 
         home_frag = (ViewGroup) findViewById(R.id.home_frame_layout);
         if (home_frag!=null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.home_frame_layout, new ContactList());
-            transaction.commit();
+            if (savedInstanceState==null) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.add(R.id.home_frame_layout, new ContactList());
+                transaction.commit();
+            }
         }
 
         details_frag = (ViewGroup) findViewById(R.id.details_frame_layout);

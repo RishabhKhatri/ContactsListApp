@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class AddActivity extends AppCompatActivity {
@@ -80,8 +81,7 @@ public class AddActivity extends AppCompatActivity {
                             }
                             db.collection("contacts").add(contact);
                             Toast.makeText(getBaseContext(), "New contact created!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getBaseContext(), ContactActivity.class);
-                            startActivity(intent);
+                            finish();
                         } else {
                             editPhone.setError("Invalid phone number!");
                         }
@@ -156,9 +156,23 @@ public class AddActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ProgressDialog dialog = new ProgressDialog(getBaseContext());
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setMessage("");
+
                 contactURL = taskSnapshot.getDownloadUrl();
                 progressDialog.dismiss();
-                Picasso.with(getBaseContext()).load(contactURL).transform(new CircleTransform()).into(profileImageView);
+                Picasso.with(getBaseContext()).load(contactURL).transform(new CircleTransform()).into(profileImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
             }
         });
     }

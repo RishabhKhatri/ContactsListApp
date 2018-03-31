@@ -86,4 +86,37 @@ public class ContactList extends Fragment {
                 });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setTitle("All Contacts");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        final List<Contact> contacts = new ArrayList<>();
+        db.collection("contacts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Contact contact = document.toObject(Contact.class);
+                                Log.d(TAG, contact.getName() + " " + contact.getEmail() + " " + contact.getPhone());
+                                contact.setId(document.getId());
+                                contacts.add(contact);
+                            }
+                            adapter = new ContactsAdapter(contacts);
+                            recyclerView.setAdapter(adapter);
+                            progressDialog.dismiss();
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
 }

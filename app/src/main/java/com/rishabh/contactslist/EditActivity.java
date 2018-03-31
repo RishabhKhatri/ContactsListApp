@@ -58,13 +58,13 @@ public class EditActivity extends AppCompatActivity {
         editEmail.setText(contact.getEmail());
         editPhone.setText(contact.getPhone());
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading profile image...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        progressDialog.setCancelable(false);
-
         if (contact.getImage()!=null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading profile image...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+
             Picasso.with(this).load(contact.getImage()).transform(new CircleTransform()).into(profileImageView, new Callback() {
                 @Override
                 public void onSuccess() {
@@ -127,8 +127,7 @@ public class EditActivity extends AppCompatActivity {
                         );
                     }
                     Toast.makeText(getBaseContext(), "Contact updated!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getBaseContext(), ContactActivity.class);
-                    startActivity(intent);
+                    finish();
                 } else {
                     editPhone.setError("Invalid phone number!");
                 }

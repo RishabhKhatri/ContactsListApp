@@ -39,8 +39,7 @@
                             android:id="@+id/showImage"
                             android:layout_width="match_parent"
                             android:layout_height="300dp"
-                            android:src="@mipmap/ic_launcher_round"
-                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:src="@mipmap/ic_launcher"
                             android:scaleType="fitXY"
                             android:contentDescription="TODO" />
 
