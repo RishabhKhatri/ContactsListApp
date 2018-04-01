@@ -24,17 +24,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class ContactDetails extends Fragment {
 
+    private static final String TAG = "Delete";
     private Contact contact;
     private static final int CALL_PHONE_CODE = 273;
+    private FirebaseFirestore db;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -65,15 +71,7 @@ public class ContactDetails extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+contact.getPhone()));
-                if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.CALL_PHONE}, CALL_PHONE_CODE);
-                } else {
-                    try {
-                        startActivity(intent);
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                    }
-                }
+                startActivity(intent);
             }
         });
 
@@ -116,21 +114,6 @@ public class ContactDetails extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CALL_PHONE_CODE: {
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contact.getPhone()));
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), "Are you a fucking idiot!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.edit_layout, menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -147,6 +130,29 @@ public class ContactDetails extends Fragment {
                 intent.putExtra("selected_id", contact.getId());
                 startActivity(intent);
                 break;
+            case R.id.action_delete:
+                final ProgressDialog dialog = new ProgressDialog(getActivity());
+                dialog.setMessage("Deleting contact...");
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setCancelable(false);
+                dialog.show();
+                db.collection("contacts").document(contact.getId()).delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                dialog.dismiss();
+                                Toast.makeText(getActivity(), "Contact deleted!", Toast.LENGTH_SHORT).show();
+                                Intent intent = getActivity().getIntent();
+                                getActivity().finish();
+                                startActivity(intent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Error while deleting contact!", Toast.LENGTH_LONG).show();
+                            }
+                        });
             default:
                 break;
         }

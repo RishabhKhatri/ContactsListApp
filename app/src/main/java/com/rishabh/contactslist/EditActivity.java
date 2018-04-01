@@ -41,6 +41,8 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        getSupportActionBar().setTitle("Edit Contact");
+
         db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();

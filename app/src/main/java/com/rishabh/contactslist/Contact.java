@@ -2,8 +2,11 @@ package com.rishabh.contactslist;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class Contact implements Parcelable {
+import java.util.Comparator;
+
+public class Contact implements Parcelable{
     private String id;
     private String name;
     private String email;

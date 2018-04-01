@@ -39,6 +39,8 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        getSupportActionBar().setTitle("Add New Contact");
+
         db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -156,23 +158,10 @@ public class AddActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ProgressDialog dialog = new ProgressDialog(getBaseContext());
-                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                dialog.setMessage("");
 
                 contactURL = taskSnapshot.getDownloadUrl();
                 progressDialog.dismiss();
-                Picasso.with(getBaseContext()).load(contactURL).transform(new CircleTransform()).into(profileImageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
+                Picasso.with(getBaseContext()).load(contactURL).transform(new CircleTransform()).into(profileImageView);
             }
         });
     }

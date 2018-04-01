@@ -25,6 +25,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactList extends Fragment {
@@ -76,6 +78,12 @@ public class ContactList extends Fragment {
                                 contact.setId(document.getId());
                                 contacts.add(contact);
                             }
+                            Collections.sort(contacts, new Comparator<Contact>() {
+                                @Override
+                                public int compare(Contact o1, Contact o2) {
+                                    return o1.getName().compareTo(o2.getName());
+                                }
+                            });
                             adapter = new ContactsAdapter(contacts);
                             recyclerView.setAdapter(adapter);
                             progressDialog.dismiss();
@@ -110,6 +118,12 @@ public class ContactList extends Fragment {
                                 contact.setId(document.getId());
                                 contacts.add(contact);
                             }
+                            Collections.sort(contacts, new Comparator<Contact>() {
+                                @Override
+                                public int compare(Contact o1, Contact o2) {
+                                    return o1.getName().compareTo(o2.getName());
+                                }
+                            });
                             adapter = new ContactsAdapter(contacts);
                             recyclerView.setAdapter(adapter);
                             progressDialog.dismiss();

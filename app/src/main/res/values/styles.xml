@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="CustomTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#00AA8D</item>
         <item name="colorAccent">#691A99</item>
         <item name="colorPrimaryDark">#008975</item>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="#fff"
     tools:context="com.rishabh.contactslist.ContactDetails">
 
     <ScrollView
@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            android:background="#fff"
             android:gravity="center">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +26,7 @@
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card_view"
                     android:layout_gravity="center"
-                    card_view:cardBackgroundColor="@color/colorPrimaryDark"
+                    card_view:cardBackgroundColor="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     card_view:cardCornerRadius="4dp">
@@ -38,8 +38,8 @@
                         <ImageView
                             android:id="@+id/showImage"
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"
-                            android:src="@mipmap/ic_launcher"
+                            android:layout_height="400dp"
+                            android:src="@color/colorPrimaryDark"
                             android:scaleType="fitXY"
                             android:contentDescription="TODO" />
 
@@ -51,7 +51,7 @@
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:paddingTop="10dp"
-                            android:textColor="#fff"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="35sp" />
 
                         <TextView
@@ -62,7 +62,7 @@
                             android:paddingBottom="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:textColor="#fff"
+                            android:textColor="@color/black"
                             android:textSize="20sp"/>
 
                         <TextView
@@ -73,7 +73,7 @@
                             android:paddingBottom="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:textColor="#fff"
+                            android:textColor="@color/black"
                             android:textSize="20sp"/>
 
                     </RelativeLayout>
