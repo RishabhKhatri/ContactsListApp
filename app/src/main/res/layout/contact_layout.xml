@@ -21,9 +21,10 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/profile_icon"
         android:ellipsize="marquee"
-        android:text="Description"
         android:textSize="12sp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/profile_icon" />
 
     <TextView
         android:id="@+id/name"
@@ -35,7 +36,8 @@
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/profile_icon"
         android:gravity="center_vertical"
-        android:text="Example application"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/profile_icon" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.rishabh.contactslist;
+package com.rishabh.A2_2015077;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

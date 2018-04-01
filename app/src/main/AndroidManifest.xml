@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rishabh.contactslist">
+    package="com.rishabh.A2_2015077">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ContactActivity"
+            android:name="com.rishabh.A2_2015077.ContactActivity_A2_2015077"
             android:theme="@style/AppTheme"
             android:configChanges="orientation|screenSize">
             <intent-filter>
@@ -23,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditActivity" />
-        <activity android:name=".AddActivity" />
+        <activity android:name="com.rishabh.A2_2015077.EditActivity_A2_2015077" />
+        <activity android:name="com.rishabh.A2_2015077.AddActivity_A2_2015077" />
     </application>
 
 </manifest>

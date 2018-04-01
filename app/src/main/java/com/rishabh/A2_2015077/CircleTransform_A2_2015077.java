@@ -1,4 +1,4 @@
-package com.rishabh.contactslist;
+package com.rishabh.A2_2015077;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -7,11 +7,7 @@ import android.graphics.Paint;
 
 import com.squareup.picasso.Transformation;
 
-/**
- * Created by Rishabh on 3/30/2018.
- */
-
-public class CircleTransform implements Transformation {
+public class CircleTransform_A2_2015077 implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());

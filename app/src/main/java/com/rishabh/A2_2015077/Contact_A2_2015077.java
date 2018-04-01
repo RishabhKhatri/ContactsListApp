@@ -1,44 +1,41 @@
-package com.rishabh.contactslist;
+package com.rishabh.A2_2015077;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
-import java.util.Comparator;
-
-public class Contact implements Parcelable{
+public class Contact_A2_2015077 implements Parcelable{
     private String id;
     private String name;
     private String email;
     private String phone;
     private String image;
 
-    public Contact() {
+    public Contact_A2_2015077() {
 
     }
 
-    public Contact(String name, String email, String phone) {
+    public Contact_A2_2015077(String name, String email, String phone) {
         this.name = name;
         this.email = email;
         this.phone = phone;
     }
 
-    protected Contact(Parcel in) {
+    protected Contact_A2_2015077(Parcel in) {
         name = in.readString();
         email = in.readString();
         phone = in.readString();
         image = in.readString();
     }
 
-    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+    public static final Creator<Contact_A2_2015077> CREATOR = new Creator<Contact_A2_2015077>() {
         @Override
-        public Contact createFromParcel(Parcel in) {
-            return new Contact(in);
+        public Contact_A2_2015077 createFromParcel(Parcel in) {
+            return new Contact_A2_2015077(in);
         }
 
         @Override
-        public Contact[] newArray(int size) {
-            return new Contact[size];
+        public Contact_A2_2015077[] newArray(int size) {
+            return new Contact_A2_2015077[size];
         }
     };
 

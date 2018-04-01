@@ -1,12 +1,10 @@
-package com.rishabh.contactslist;
+package com.rishabh.A2_2015077;
 
-import android.*;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -28,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,49 +34,57 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class ContactActivity extends AppCompatActivity {
+public class ContactActivity_A2_2015077 extends AppCompatActivity {
 
+    // Constants
     private static final String TAG = "Delete";
+    private static final int ASK_PERMISSIONS = 273;
+
+    // Member variables
     private FloatingActionButton fab;
     private ViewGroup home_frag, details_frag;
-    private static final int ASK_PERMISSIONS = 273;
     private FirebaseFirestore db;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Set custom theme
         setTheme(R.style.CustomTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
+        // Initialisation
         db = FirebaseFirestore.getInstance();
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        home_frag = (ViewGroup) findViewById(R.id.home_frame_layout);
+        details_frag = (ViewGroup) findViewById(R.id.details_frame_layout);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AddActivity.class);
+                Intent intent = new Intent(getBaseContext(), AddActivity_A2_2015077.class);
                 startActivity(intent);
             }
         });
 
-        home_frag = (ViewGroup) findViewById(R.id.home_frame_layout);
-        details_frag = (ViewGroup) findViewById(R.id.details_frame_layout);
-
+        // Request permissions
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CALL_PHONE, Manifest.permission.READ_CONTACTS}, ASK_PERMISSIONS);
         }
 
+        // Set fragments for every other turn
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean("firstTime", false)) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.home_frame_layout, new ContactList());
+            transaction.add(R.id.home_frame_layout, new ContactList_A2_2105077());
             transaction.commit();
         }
     }
 
+    // To change fragments from inside fragments and adapters
     public void changeFragments(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (details_frag!=null) {
@@ -103,11 +108,11 @@ public class ContactActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 Intent intent = getIntent();
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); // To override animations while refreshing
                 finish();
-                overridePendingTransition(0,0);
+                overridePendingTransition(0,0); // To override animations while refreshing
                 startActivity(intent);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0,0); // To override animations while refreshing
                 break;
             default:
                 break;
@@ -124,6 +129,8 @@ public class ContactActivity extends AppCompatActivity {
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // Check for first run of app
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                     if (!prefs.getBoolean("firstTime", false)) {
 
@@ -133,6 +140,7 @@ public class ContactActivity extends AppCompatActivity {
                         dialog.show();
                         dialog.setCancelable(false);
 
+                        // Delete existing contacts
                         db.collection("contacts")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -143,9 +151,13 @@ public class ContactActivity extends AppCompatActivity {
                                                 db.collection("contacts").document(document.getId()).delete();
                                             }
                                             dialog.dismiss();
+
+                                            // Get contacts from content providers
                                             getContentProviders();
+
+                                            // Set fragment for first run
                                             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                            transaction.add(R.id.home_frame_layout, new ContactList());
+                                            transaction.add(R.id.home_frame_layout, new ContactList_A2_2105077());
                                             transaction.commit();
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -173,6 +185,11 @@ public class ContactActivity extends AppCompatActivity {
         }
     }
 
+    // Function to get contacts from content providers
+
+    /**
+     * @see <a href='http://www.androhub.com/android-read-contacts-using-content-provider/'>For content provider</a>
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getContentProviders() {
 
@@ -238,8 +255,8 @@ public class ContactActivity extends AppCompatActivity {
                     } while (data_cursor.moveToNext());
                 }
                 if (!TextUtils.isEmpty(phone)) {
-                    Contact contact = new Contact(name, email, phone);
-                    db.collection("contacts").add(contact);
+                    Contact_A2_2015077 contactA22015077 = new Contact_A2_2015077(name, email, phone);
+                    db.collection("contacts").add(contactA22015077);
                 }
             } while (cursor.moveToNext());
         }

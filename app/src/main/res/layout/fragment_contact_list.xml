@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rishabh.contactslist.ContactList">
+    tools:context="com.rishabh.A2_2015077.ContactList_A2_2105077">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"

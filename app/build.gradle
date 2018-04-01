@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.rishabh.contactslist"
+        applicationId "com.rishabh.A2_2015077"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

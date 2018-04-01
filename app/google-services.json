@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1010787138381:android:fdd419a01abcabf2",
+        "mobilesdk_app_id": "1:1010787138381:android:036e970808ade7bf",
         "android_client_info": {
-          "package_name": "com.rishabh.contactslist"
+          "package_name": "com.rishabh.A2_2015077"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1010787138381-a35s9lppncr6mhhqgbvc4qo02qc0qh5d.apps.googleusercontent.com",
+          "client_id": "1010787138381-ejf15hnf5kbc770mpl05eid0dn4d048f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.rishabh.contactslist",
+            "package_name": "com.rishabh.A2_2015077",
             "certificate_hash": "b8599e91d046612b35d0c2d6055be441d0a394d9"
           }
         },
